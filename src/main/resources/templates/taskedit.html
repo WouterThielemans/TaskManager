@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <link th:href="@{/css/stylesheet.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<link th:include="navbar.html">
+<body>
+<main role="main" class="container">
+    <div class="starter-template">
+        <form method="post" th:action="@{/tasks/edit/{id}(id=${task.id})}" th:object="${task}">
+
+            <h4  th:text="#{edittask}"/>
+
+            <label for="title" th:text="#{title}" >: </label>
+            <input class="form-control" type="text" name="title" id="title" th:field="*{title}">
+
+            <label for="desc" th:text="#{description}">: </label>
+            <input class="form-control" type="text" name="desc" id="desc" th:field="*{desc}">
+
+            <label for="date" th:text="#{duedate}">: </label>
+            <input class="form-control" type="datetime-local" name="date" id="date" th:field="*{date}">
+
+            <input class="btn btn-primary" type="submit"  th:value="#{edittask}">
+        </form>
+    </div>
+</main>
+</body>
+</html>

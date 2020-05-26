@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/stylesheet.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<link th:include="navbar.html">
+<body>
+<main role="main" class="container">
+<div class="starter-template">
+    <form method="post" th:action="@{/tasks/{id}/sub/create(id=${task.id})}">
+
+        <h4>Create new subtask</h4>
+
+        <label for="title">Title: </label>
+        <input class="form-control" type="text" name="title" id="title">
+
+        <label for="description">Description: </label>
+        <input class="form-control" type="text" name="description" id="description">
+
+        <input class="btn btn-primary" type="submit" value="Add subtask">
+    </form>
+</div>
+</main>
+</body>
+</html>
