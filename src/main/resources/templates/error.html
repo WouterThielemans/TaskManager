@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error page</title>
+    <link href="/stylesheet.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <link th:include="navbar.html">
+    <h1 th:text="#{errorpage}"></h1>
+</header>
+
+<main role="main" class="container">
+    <div class="starter-template">
+        <h2 th:text="#{error}"></h2>
+        <p th:text="#{notask}"></p>
+    </div>
+</main>
+</body>
+</html>

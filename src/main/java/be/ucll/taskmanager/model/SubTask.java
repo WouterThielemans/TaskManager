@@ -1,4 +1,4 @@
-package be.ucll.taskmanager.domain;
+package be.ucll.taskmanager.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,16 +13,16 @@ public class SubTask {
     @GeneratedValue
     private UUID id;
 
-    @NotEmpty
-    @Size(min=2)
+    @NotEmpty(message = "Title can not be empty!")
+    @Size(max=100)
     private String title;
-    @NotEmpty
-    @Size(max=150)
-    private String description;
+    @NotEmpty(message = "Description can not be empty!")
+    @Size(max=200)
+    private String desc;
 
-    public SubTask(String title, String description) {
+    public SubTask(String title, String desc) {
         this.title = title;
-        this.description = description;
+        this.desc = desc;
     }
     public SubTask(){
 
@@ -36,12 +36,12 @@ public class SubTask {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getTitle() {

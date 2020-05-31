@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link th:href="@{/css/stylesheet.css}" rel="stylesheet" />
+    <title>Add Subtask</title>
+    <link href="/stylesheet.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <link th:include="navbar.html">
 <body>
 <main role="main" class="container">
 <div class="starter-template">
-    <form method="post" th:action="@{/tasks/{id}/sub/create(id=${task.id})}">
+    <form method="post" th:action="@{/tasks/{id}/sub/create(id=${task.id})}" th:object="${subtask}">
 
-        <h4>Create new subtask</h4>
+        <h4 th:text="#{createsubtask}">Create new subtask</h4>
 
-        <label for="title">Title: </label>
+        <label for="title" th:text="#{title}">Title: </label>
         <input class="form-control" type="text" name="title" id="title">
+        <p th:errors="*{title}"></p>
 
-        <label for="description">Description: </label>
-        <input class="form-control" type="text" name="description" id="description">
+        <label for="desc" th:text="#{description}">Description: </label>
+        <input class="form-control" type="text" name="desc" id="desc">
+        <p th:errors="*{desc}"></p>
 
-        <input class="btn btn-primary" type="submit" value="Add subtask">
+        <br>
+        <input class="btn btn-primary" type="submit" th:value="#{addsubtask}">
     </form>
 </div>
 </main>

@@ -1,12 +1,20 @@
 package be.ucll.taskmanager.dto;
 
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
 public class SubTaskDTO {
-    @NotEmpty
-    private String title, description;
+    @Id
     private UUID id;
+    @NotEmpty(message = "Title can not be empty!")
+    @Size(max=100)
+    private String title;
+    @NotEmpty(message = "Description can not be empty!")
+    @Size(max=200)
+    private String desc;
+
 
     public UUID getId() {
         return id;
@@ -24,11 +32,11 @@ public class SubTaskDTO {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

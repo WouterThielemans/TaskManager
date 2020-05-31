@@ -1,14 +1,29 @@
 package be.ucll.taskmanager.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Id;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 public class TaskDTO {
-    private String title;
-    private String desc;
-    private LocalDateTime date;
+    @Id
     private UUID id;
+    @NotEmpty(message = "Title can not be empty!")
+    @Size(max=100)
+    private String title;
+    @NotEmpty(message = "Description can not be empty!")
+    @Size(max=200)
+    private String desc;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @NotNull(message = "Date can not be empty!")
+    @Future(message = "Task can not be in de past!")
+    private LocalDateTime date;
     private List<SubTaskDTO> subTasks;
 
     public UUID getId() {
@@ -17,13 +32,6 @@ public class TaskDTO {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-    public List<SubTaskDTO> getSubTasks() {
-        return subTasks;
-    }
-
-    public void setSubTasks(List<SubTaskDTO> subTasks) {
-        this.subTasks = subTasks;
     }
 
     public String getTitle() {
@@ -48,5 +56,13 @@ public class TaskDTO {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public List<SubTaskDTO> getSubTasks() {
+        return subTasks;
+    }
+
+    public void setSubTasks(List<SubTaskDTO> subTasks) {
+        this.subTasks = subTasks;
     }
 }

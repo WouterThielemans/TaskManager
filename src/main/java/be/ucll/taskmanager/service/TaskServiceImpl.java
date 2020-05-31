@@ -1,7 +1,7 @@
 package be.ucll.taskmanager.service;
 
-import be.ucll.taskmanager.domain.SubTask;
-import be.ucll.taskmanager.domain.Task;
+import be.ucll.taskmanager.model.SubTask;
+import be.ucll.taskmanager.model.Task;
 import be.ucll.taskmanager.dto.SubTaskDTO;
 import be.ucll.taskmanager.dto.TaskDTO;
 import be.ucll.taskmanager.repository.TaskRepo;
@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
                         SubTaskDTO subtaskDTO = new SubTaskDTO();
                         subtaskDTO.setId(s.getId());
                         subtaskDTO.setTitle(s.getTitle());
-                        subtaskDTO.setDescription(s.getDescription());
+                        subtaskDTO.setDesc(s.getDesc());
 
                         return subtaskDTO;
                     }).collect(Collectors.toList())
@@ -59,15 +59,13 @@ public class TaskServiceImpl implements TaskService {
                     SubTaskDTO subtaskDTO = new SubTaskDTO();
                     subtaskDTO.setId(s.getId());
                     subtaskDTO.setTitle(s.getTitle());
-                    subtaskDTO.setDescription(s.getDescription());
+                    subtaskDTO.setDesc(s.getDesc());
 
                     return subtaskDTO;
                 }).collect(Collectors.toList())
         );
-
         return dto;
     }
-
 
     @Override
     public void addTask(TaskDTO taskDTO) {
@@ -77,39 +75,6 @@ public class TaskServiceImpl implements TaskService {
         task.setDesc(taskDTO.getDesc());
         task.setDate(taskDTO.getDate());
 
-        /*task.setSubTasks(taskDTO.getSubTasks()
-                .stream().map(s -> {
-                    SubTask subtask = new SubTask();
-                    subtask.setId(s.getId());
-                    subtask.setTitle(s.getTitle());
-                    subtask.setDescription(s.getDescription());
-
-                    return subtask;
-                }).collect(Collectors.toList())
-        );*/
-
-        repo.save(task);
-
-    }
-
-    @Transactional
-    public void editTaskByTaskDTO(TaskDTO taskDTO) {
-        Task task = new Task();
-        task.setId(taskDTO.getId());
-        task.setTitle(taskDTO.getTitle());
-        task.setDesc(taskDTO.getDesc());
-        task.setDate(taskDTO.getDate());
-
-        /*task.setSubTasks(taskDTO.getSubTasks()
-                .stream().map(s -> {
-                    SubTask subtask = new SubTask();
-                    subtask.setId(s.getId());
-                    subtask.setTitle(s.getTitle());
-                    subtask.setDescription(s.getDescription());
-
-                    return subtask;
-                }).collect(Collectors.toList())
-        );*/
         repo.save(task);
     }
 
@@ -120,31 +85,21 @@ public class TaskServiceImpl implements TaskService {
         t.setDesc(task.getDesc());
         t.setDate(task.getDate());
         t.setTitle(task.getTitle());
+
         repo.save(t);
     }
 
-
-
    @Override
    public Task getTaskById(UUID id) {
-
        return repo.getOne(id);
    }
-   /* @Override
-    public java.lang.Object getTasksById(UUID id) {
-        return repo.getTaskById(id);
-    }*/
 
-   /* @Override
-    public void createSubTask(UUID id, SubTask subtask) {
-        repo.createSubTask(id,subtask);
-    }*/
    @Override
    @Transactional
    public void addSubtask(UUID mainTaskId, SubTaskDTO subtaskDTO) {
        SubTask subtask = new SubTask();
        subtask.setTitle(subtaskDTO.getTitle());
-       subtask.setDescription(subtaskDTO.getDescription());
+       subtask.setDesc(subtaskDTO.getDesc());
 
        Task task = getTaskById(mainTaskId);
 
@@ -152,4 +107,13 @@ public class TaskServiceImpl implements TaskService {
 
        repo.save(task);
    }
+
+    @Override
+    public List<SubTask> getSubTasks(UUID id) {
+        Task t = repo.getOne(id);
+
+        List<SubTask> subtasks;
+        subtasks = t.getSubtasks();
+        return subtasks;
+    }
 }

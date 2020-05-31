@@ -1,11 +1,10 @@
 package be.ucll.taskmanager.service;
 
-import be.ucll.taskmanager.domain.SubTask;
-import be.ucll.taskmanager.domain.Task;
+import be.ucll.taskmanager.model.SubTask;
+import be.ucll.taskmanager.model.Task;
 import be.ucll.taskmanager.dto.SubTaskDTO;
 import be.ucll.taskmanager.dto.TaskDTO;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,6 +22,8 @@ public interface TaskService {
     public void editTask(UUID id,TaskDTO task);
 
     public void addSubtask(UUID mainTaskId, SubTaskDTO subtaskDTO);
+
+    public List<SubTask> getSubTasks(UUID id);
 
     
    /* List<TaskDTO> getTasks();

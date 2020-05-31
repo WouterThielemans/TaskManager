@@ -3,31 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Task listing</title>
-    <link th:href="@{/css/stylesheet.css}" rel="stylesheet" />
+    <title>Task Overview</title>
+    <link href="/stylesheet.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <link th:include="navbar.html">
 <body>
-
-
 <main role="main" class="container">
     <div class="starter-template">
-        <h4>Overview of tasks</h4>
-    <table>
+        <h4 th:text="#{overviewtasks}"></h4>
+    <table class="table table-striped table-dark">
         <thead>
-        <tr>
-            <th>titel</th>
-            <th>date</th>
-        </tr>
+        <div th:if="${tasks.size()>0}">
+            <tr>
+                <th th:text="#{title}">titel</th>
+                <th th:text="#{date}">date</th>
+            </tr>
+        </div>
         </thead>
     <tbody>
 
     <tr th:each="task :${tasks}">
         <td><a th:href="@{/tasks/{id}(id=${task.id})}" th:text="*{task.title}"></a></td>
         <td th:text="*{#temporals.format(task.date, 'dd-MM-yyyy HH:mm')}"></td>
+
     </tr>
+    <div th:if="${#lists.isEmpty(tasks)}">
+        <tr th:text="#{empty}"></tr>
+    </div>
     </tbody>
     </table>
     </div>
 </main>
+</body>
+</html>

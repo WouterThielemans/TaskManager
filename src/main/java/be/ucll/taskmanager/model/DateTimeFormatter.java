@@ -1,4 +1,4 @@
-package be.ucll.taskmanager.domain;
+package be.ucll.taskmanager.model;
 
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
